@@ -29,13 +29,30 @@
 10. Add .env to your .gitignore file, defeats the purpose of hiding password, if we push the file up to GitHUb anyways!
 11. Create the User.js file 
 12. Create the index.js file in the models folder
-        a.  
+        a.  will serve as a means to collect all the models and export them out as a package
 13. Now that we've finished the Sequelize model for the time being, let's use it with some Express.js API routes to create, read, update, and delete user data.
 14. Create API Routes for the User Model
-        a. create a subdirectory in the routes directory call api
-        b. once that's created, create a file inside of routes/api called user-routes.js
-        c. For this project, we created five routes that will work with the User model to perform CRUD operations
+        a.  create a subdirectory in the routes directory call api
+        b.  once that's created, create a file inside of routes/api called user-routes.js
+        c.  For this project, we created five routes that will work with the User model to perform CRUD operations
 15.  Hook up the server
         a.  Start by creating an index.js file in the routes/api subidirectory ( will serve as a mean s to collect all of the API routes and package them up for us)
-        b. Now create another index.js file to package up the packaged API routes.  This file will be created in the routes folder
+        b.  Now create another index.js file to package up the packaged API routes.  This file will be created in the routes folder
         c.  Now import the routes to server.js that is located at the root of the project
+16.  Test and Refine the User Routes    
+        a.  Open insomnia and perform post, put, get, and delete request
+        b.  Also put in incorrect data to make sure the application handles the error
+17.  Protect the Passwords ~ keep the passwords from being visible when returning responses to the server
+        a.  For the User.findAll and User.findOne methods, add the attributes: { exclude:....}  
+18.  Hash the passwords using bcrypt
+        a.  Navigate to the User.js in the models folder, since it is responsible for creating the User data model
+        b.  Add the bcrypt package to the application by installing the package from npm in the project's root directory
+        c.  Import the package into the User.js file
+        d.  Add the hooks object to the User.init() function
+                1. The nested level of the hooks object inserted is very important, notice it was added to the second object in User.init()
+        e.  Add the beforeCreate(userData) hook with the userData parameter to the User.init to hash the password before creating the User
+        f.  Add the  beforeUpdate(updatedUserData) hook, passing in the updatedUserData parameter to the hooks property to hash an updated password
+                1.  Add the individualHooks: true option to the query call in the User.update function in the user-routes.js file
+19.  Create the Login Route for Authentication
+        a.  Go to user-routs.js file in the routes/api folder and add the login POST route beneath the POST route that creates a new user
+

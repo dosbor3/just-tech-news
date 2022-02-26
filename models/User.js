@@ -1,9 +1,15 @@
 const {Model, DataTypes} = require("sequelize");    //getting the Model class and DataTypes object from sequelize
 const sequelize = require("../config/connection");  //retrieve the sequelize constructor from the connection.js file located in the config folder
+const bcrypt = require("bcrypt"); //importing the bcrypt package
 
 // This Model class is what we create our own models from using the extends keyword so User inherits all of 
 // the functionality the Model class has.
-class User extends Model {}
+class User extends Model {
+  // set up method to run on instance data (per user) to check password
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
+  }
+}
 
 
 // Once we create the User class, we use the .init() method to initialize the model's data and configuration, passing 
@@ -50,13 +56,18 @@ User.init(
       }
     },
     {
-      sequelize,
-      timestamps: false,
-      freezeTableName: true,
-      underscored: true,
-      modelName: 'user'
+      hooks: {
+        // set up beforeCreate lifecycle "hook" functionality
+        async beforeCreate(newUserData) {
+          newUserData.password = await bcrypt.hash(newUserData.password, 10);
+          return newUserData;
+        },
+        // set up beforeUpdate lifecycle "hook" functionality
+        async beforeUpdate(updatedUserData) {
+          updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+          return updatedUserData;
+        }
     },
-    {
         // TABLE CONFIGURATION OPTIONS GO HERE (https://sequelize.org/v5/manual/models-definition.html#configuration))
     
         // pass in our imported sequelize connection (the direct connection to our database)
