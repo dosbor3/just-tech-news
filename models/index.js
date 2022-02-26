@@ -4,6 +4,7 @@ Let's start by creating an index.js file in the models folder. This file will be
 
 
 const User = require('./User');
+const Post = require('./Post');
 
 module.exports = { User };
 

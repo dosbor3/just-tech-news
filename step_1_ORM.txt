@@ -55,4 +55,8 @@
                 1.  Add the individualHooks: true option to the query call in the User.update function in the user-routes.js file
 19.  Create the Login Route for Authentication
         a.  Go to user-routs.js file in the routes/api folder and add the login POST route beneath the POST route that creates a new user
+        b.  Go to the User.js model and add checkPassword method
+        c.  Go to the user-routes.js file and update the login api to include the checkPassword method
+        d.  Verify changes using insomnia
+20.  Create the Post model
 
