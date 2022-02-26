@@ -1,0 +1,14 @@
+1. Setup the Template Engine (Handlebars)
+    a.  Install the Handlebars Template Engine
+            npm install express-Handlebars
+    b.  In server.js import Handlebars
+            const exphbs = require('express-handlebars');
+    c.  Create an instance of Handlebars
+            const hbs = exphbs.create({});
+    d.  Setup app to use the handlebars engine
+            app.engine('handlebars', hbs.engine);
+    e.  set the app's view engine to handlebars
+            app.set('view engine', 'handlebars');
+2.  Setup where the template files live
+    a.  project root -->views -->layouts --> main.handlebars
+3. Set Up MVC

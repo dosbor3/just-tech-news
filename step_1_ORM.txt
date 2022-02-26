@@ -1,0 +1,41 @@
+1.  Create a databaase
+2.  Start the app
+3.  Sequelize will create the tables for us!
+4.  Good practice to keep the database information with the application's code, so let's add it to a file
+        a. Create a file in the db directory called schema.Sql
+        b. add the following to it:
+                DROP DATABASE IF EXISTS just_tech_news_db;
+                CREATE DATABASE just_tech_new_db;
+5.  Navigate to the MySQL shell and get the database up and running by following these steps:
+        a.  navigate to the root directory of the project, type mysql -u root -p 
+        b.  Enter your mysql password
+        c.  to create database, source db/schema.Sql
+        d.  ensure the db was created, SHOW databases;
+        e.  quit the database, quit;
+6.  Set up the application to connect to the database using Sequelize
+        a.  Create a file in the config directory called connection.js
+        b.  Call the Sequelize connection constructor function by adding the following code to connection.js
+                ***All we're doing here is importing the base Sequelize class and using it to create a new connection to the database. The new Sequelize() function accepts the database name, MySQL username, and MySQL password (respectively) as parameters, then we also pass configuration settings. Once we're done, we simply export the connection.
+7.  Set Up Environment Variables
+        a.  If we were to push to GitHub right now, everyone can see the password
+        b.  so we must create environment variables to hold the password, and pass the environment variable 
+        c.  We must install another NPM package called dotenv, npm install dotenv
+8.  Once installed (dotenv...), at the root of your application, create a file called .env and add the folloiwng code:
+                                DB_NAME='just_tech_news_db'
+                                DB_USER='your-mysql-username'
+                                DB_PW='your-mysql-password'  
+9.  Load the environment variables into the connection.js file by adding the following to the connection.js file:
+                        require("dotenv").config;
+10. Add .env to your .gitignore file, defeats the purpose of hiding password, if we push the file up to GitHUb anyways!
+11. Create the User.js file 
+12. Create the index.js file in the models folder
+        a.  
+13. Now that we've finished the Sequelize model for the time being, let's use it with some Express.js API routes to create, read, update, and delete user data.
+14. Create API Routes for the User Model
+        a. create a subdirectory in the routes directory call api
+        b. once that's created, create a file inside of routes/api called user-routes.js
+        c. For this project, we created five routes that will work with the User model to perform CRUD operations
+15.  Hook up the server
+        a.  Start by creating an index.js file in the routes/api subidirectory ( will serve as a mean s to collect all of the API routes and package them up for us)
+        b. Now create another index.js file to package up the packaged API routes.  This file will be created in the routes folder
+        c.  Now import the routes to server.js that is located at the root of the project
