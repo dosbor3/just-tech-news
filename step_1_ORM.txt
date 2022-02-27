@@ -67,4 +67,8 @@
 21.  Test changes in insomnia, create a user
 22.  Build our Post routes
         a.  
+23.  Build a through table to connect two tables with a many to many relationship
+        a.  In the models directory, create a file called Vote.js then create the Vote model
+24.  Instruct the User and Post models how they can query on one another through this Vote model by creating a many to many association
+        a.  Import the Vote model into models/index
 
