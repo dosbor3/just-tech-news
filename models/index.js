@@ -6,7 +6,19 @@ Let's start by creating an index.js file in the models folder. This file will be
 const User = require('./User');
 const Post = require('./Post');
 
-module.exports = { User };
+// create associations ~ One to Many
+User.hasMany(Post, {
+    foreignKey: 'user_id'
+});
+
+//Many to One
+Post.belongsTo(User, {
+    foreignKey: 'user_id',
+});
+
+
+
+module.exports = { User, Post };
 
 /*
 All this file is responsible for right now is importing the User model and exporting an object with it as a property. It seems unnecessary at the moment, but doing this now will set us up for future growth of the application.

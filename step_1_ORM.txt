@@ -59,4 +59,12 @@
         c.  Go to the user-routes.js file and update the login api to include the checkPassword method
         d.  Verify changes using insomnia
 20.  Create the Post model
+        a.  Create the Post.js file in the models folder
+        b.  Import the Post model in the index.js file
+        c.  Create the one-to-many associations between a User and their posts in the index.js file within the models folder
+        d.  Create the reverse association between Post and the user in the index.js file within the models folder
+        e.  Tables must be dropped to add new associations, go to server file and turn force: false to force: true, then back to false again
+21.  Test changes in insomnia, create a user
+22.  Build our Post routes
+        a.  
 
