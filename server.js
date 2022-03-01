@@ -1,12 +1,21 @@
+const path = require('path');
 const express = require('express'); //importing the server
-const routes = require('./routes'); //importing the routes
+const routes = require('./controllers'); //importing the controllers, used to be the routes folder
 const sequelize = require('./config/connection'); //importing the sequelize instance created in the conndection.js
 
 const app = express();  //creating an instance of the server named app
 const PORT = process.env.PORT || 3001; //Use the PORT provided by the environment if available, otherwise use port 3001
 
+const exphbs = require('express-handlebars');
+const hbs = exphbs.create({});
+
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
+app.use(express.static(path.join(__dirname, 'public'))); //allows you to serve static files, __dirname returns the directory containing the current file
+
 
 //turn on routes
 app.use(routes);
